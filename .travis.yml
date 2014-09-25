@@ -1,0 +1,15 @@
+language: ruby
+rvm:
+- 2.1.2
+deploy:
+  provider: heroku
+  api_key:
+    secure: K2gSeVEfj6tiloIJgA1e+UxcHxu/A00/hiouncjr7q9OM7Lkpw5erXh9Z64Jo44qsc+OhmOE27x+TGmb1GFBmA7BqyGYhq8pM0FN6vqusBQCV70/5EyRYALNYyTl104lCgHPN4mdSDFUALF/lwRYs7fQycMBLoe/gVu+01dGrIY=
+  app: rakugle
+  on:
+    repo: rivayama/rakugle
+addons:
+  postgresql: "9.3"
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - cp config/database.yml.travis config/database.yml
