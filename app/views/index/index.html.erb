@@ -21,4 +21,11 @@
   <% end %>
   </ul>
 
+  <h2>Kobo</h2>
+  <ul>
+  <% @kobo_items.first(10).each do |item| %>
+    <li><%= "#{item['Item']['title']}, #{item['Item']['itemPrice']} yen" %></li>
+  <% end %>
+  </ul>
+
 <% end %>
