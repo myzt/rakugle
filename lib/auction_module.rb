@@ -1,6 +1,7 @@
 require 'net/http'
-require 'uri'
 require 'json'
+require 'uri'
+require 'cgi'
 
 module Auction
 
@@ -13,7 +14,7 @@ module Auction
     endpoint = 'https://app.rakuten.co.jp/services/api/AuctionItem/Search/20130905?'
 
     param_string = (parameters.collect {|k, v| "#{k}=#{v.encode("UTF-8")}"} ).join('&')
-    uri = URI.parse( endpoint + param_string)
+    uri = URI.parse(endpoint + param_string)
     return uri
   end
 
@@ -28,7 +29,9 @@ module Auction
   def search_keyword(key)
     parameters = {
       :applicationId => @application_id,
-      :keyword => URI.escape(key)
+      :keyword => CGI.escape(key),
+      :sort => CGI.escape("standard"),
+      :hits => "15"
     }
     items =  get_result(parameters)
     return items

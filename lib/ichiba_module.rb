@@ -1,3 +1,5 @@
+require 'cgi'
+
 module Ichiba
   def initialize(appid, afid)
     RakutenWebService.configuration do |c|
@@ -7,7 +9,11 @@ module Ichiba
   end
 
   def search_keyword(key)
-    items = RakutenWebService::Ichiba::Item.search(:keyword => key)
+    items = RakutenWebService::Ichiba::Item.search(
+                                                   :keyword => key,
+                                                   :sort => CGI.escape("-reviewAverage"),
+                                                   :hits => "15"
+                                                   )
     return items
   end
 

@@ -1,3 +1,5 @@
+require 'cgi'
+
 module Books
   def initialize(appid, afid)
     RakutenWebService.configuration do |c|
@@ -7,7 +9,11 @@ module Books
   end
 
   def search_keyword(key)
-    items = RakutenWebService::Books::Total.search(:keyword => key)
+    items = RakutenWebService::Books::Total.search(
+                                                   :keyword => key,
+                                                   :sort => CGI.escape("sales"),
+                                                   :hits => "15"
+                                                   )
     return items
   end
 

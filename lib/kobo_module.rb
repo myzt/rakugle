@@ -1,6 +1,7 @@
 require 'net/http'
 require 'uri'
 require 'json'
+require 'cgi'
 
 module Kobo
 
@@ -11,9 +12,8 @@ module Kobo
 
   def create_uri(parameters)
     endpoint = 'https://app.rakuten.co.jp/services/api/Kobo/EbookSearch/20140811?'
-
     param_string = (parameters.collect {|k, v| "#{k}=#{v.encode("UTF-8")}"} ).join('&')
-    uri = URI.parse( endpoint + param_string)
+    uri = URI.parse(endpoint + param_string)
     return uri
   end
 
@@ -29,7 +29,9 @@ module Kobo
     parameters = {
       :applicationId => @application_id,
       :keyword => URI.escape(key),
-      :koboGenreId => "101"
+      :koboGenreId => "101",
+      :sort => CGI.escape("reviewAverage"),
+      :hits => "15"
     }
     items =  get_result(parameters)
     return items
