@@ -1,5 +1,6 @@
 require 'ichiba_module'
 require 'books_module'
+require 'kobo_module'
 
 class IndexController < ApplicationController
 
@@ -12,6 +13,9 @@ class IndexController < ApplicationController
 
       Books::initialize(ENV["APPID"], ENV["AFID"])
       @books_items = Books::search_keyword(@keyword)
+      
+      Kobo::initialize(ENV["APPID"], ENV["AFID"])
+      @kobo_items = Kobo::search_keyword(@keyword)
     end
   end
 
