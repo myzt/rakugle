@@ -28,4 +28,11 @@
   <% end %>
   </ul>
 
+  <h2>Auction</h2>
+  <ul>
+  <% @auction_items.first(10).each do |item| %>
+    <li><%= "#{item['Item']['itemName']}, #{item['Item']['itemPrice']} yen" %></li>
+  <% end %>
+  </ul>
+
 <% end %>
