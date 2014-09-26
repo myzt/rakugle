@@ -1,18 +1,24 @@
 <h1>Rakugle</h1>
-<p>Welcome!</p>
 
-<!-- 市場ModuleとBooksMuduleの使用例 -->
-
-<h2>市場</h2>
-<ul>
-<% @ichiba_items.first(10).each do |item| %>
-  <li><%= "#{item['itemName']}, #{item['itemPrice']} yen" %></li>
+<%= form_tag("/", method: "get") do %>
+  <%= text_field_tag(:keyword, @keyword) %>
+  <%= submit_tag("Search") %>
 <% end %>
-</ul>
 
-<h2>Books</h2>
-<ul>
-<% @books_items.first(10).each do |item| %>
-  <li><%= "#{item['title']}, #{item['itemPrice']} yen" %></li>
+<% if @keyword then %>
+
+  <h2>市場</h2>
+  <ul>
+  <% @ichiba_items.first(10).each do |item| %>
+    <li><%= "#{item['itemName']}, #{item['itemPrice']} yen" %></li>
+  <% end %>
+  </ul>
+
+  <h2>Books</h2>
+  <ul>
+  <% @books_items.first(10).each do |item| %>
+    <li><%= "#{item['title']}, #{item['itemPrice']} yen" %></li>
+  <% end %>
+  </ul>
+
 <% end %>
-</ul>
