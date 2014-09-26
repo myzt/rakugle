@@ -4,7 +4,7 @@ require 'books_module'
 class IndexController < ApplicationController
 
   def index
-    if not params[:keyword].empty? then
+    if params[:keyword] and not params[:keyword].empty? then
       @keyword = params[:keyword]
 
       Ichiba::initialize(ENV["APPID"], ENV["AFID"])
